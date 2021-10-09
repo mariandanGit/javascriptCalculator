@@ -1,0 +1,23 @@
+#mainDiv{
+    width: 100%;
+    height: 700px;
+}
+#mainDiv, #containerParent{
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+}
+#containerParent{
+    width: 450px;
+    height: 700px;
+    background-color: rgb(32, 32, 32);
+    flex-direction: column;
+    justify-content: end;
+    align-items: center;
+    border-radius: 2%;
+}
+#container{
+    display: grid;
+    width: 400px;
+    height: 500px;
+}
