@@ -29,13 +29,17 @@ function createElements(col, row){
 
         let button = document.createElement('button');
 
-        button.className = 'buttons';
+        button.classList.add('buttons');
         button.setAttribute('id', idArray[i]);
         button.textContent = symbolsArray[i];
         button.style.margin = '10px';
 
         if(button.getAttribute('id').includes('digit')){
-            button.className += ' digits';
+            button.classList.add('digits');
+        }
+
+        if(operationsArray.includes(button.getAttribute('id'))){
+            button.classList.add('operations');
         }
         container.appendChild(button);
     }
