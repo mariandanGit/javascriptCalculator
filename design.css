@@ -1,6 +1,10 @@
+body{
+    background-color: rgb(18, 80, 116);
+}
 #mainDiv{
     width: 100%;
-    height: 700px;
+    height: 600px;
+    align-items: center;
 }
 #mainDiv, #containerParent{
     display: flex;
@@ -8,16 +12,60 @@
     justify-content: center;
 }
 #containerParent{
-    width: 450px;
-    height: 700px;
-    background-color: rgb(32, 32, 32);
+    width: 350px;
+    height: 500px;
+    background-color: rgb(29, 29, 29);
     flex-direction: column;
-    justify-content: end;
+    justify-content: space-around;
     align-items: center;
-    border-radius: 2%;
+    border-radius: 1rem;
+    box-shadow:0px 15px 0px 0px #1d7f8a, 
+      0px 0px 10px 0px rgba(120, 120, 120, 0.4);
+}
+#display{
+    width: 280px;
+    height: 120px;
+    margin-top: 10px;
+    background-color: rgb(65, 65, 65);
+    border-radius: px;
+    -webkit-box-shadow: inset 0px 8px 16px -1px #000000; 
+    box-shadow: inset 0px 8px 16px -1px #000000;
 }
 #container{
     display: grid;
-    width: 400px;
-    height: 500px;
+    width: 300px;
+    height: 300px;
+    
+}
+.buttons{
+    border:none;
+    background-color: rgb(192, 192, 192);
+    border-radius: 1rem;
+    box-shadow:0px 10px 0px 0px #1d7f8a, 
+      0px 0px 10px 0px rgba(120, 120, 120, 0.4);                 
+}
+.buttons:hover{
+    transform: translateY(6px);
+    box-shadow:0px 3px 0px 0px #1d7f8a, 
+      0px 0px 10px 0px rgba(120, 120, 120, 0.4);
+}
+#allClear, #clear{
+    background-color: rgb(187, 38, 68);
+    box-shadow:0px 10px 0px 0px #701010, 
+    0px 0px 10px 0px rgba(120, 120, 120, 0.4);
+}
+#allClear:hover, #clear:hover{
+    background-color: rgb(160, 9, 40);
+    box-shadow:0px 3px 0px 0px #701010, 
+    0px 0px 10px 0px rgba(120, 120, 120, 0.4);
+}
+.operations{
+    background-color: rgb(219, 115, 17);
+    box-shadow:0px 10px 0px 0px #701010, 
+    0px 0px 10px 0px rgba(120, 120, 120, 0.4);
+}
+.operations:hover{
+    background-color: rgb(160, 9, 40);
+    box-shadow:0px 3px 0px 0px #701010, 
+    0px 0px 10px 0px rgba(120, 120, 120, 0.4);
 }

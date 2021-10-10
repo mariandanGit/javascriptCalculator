@@ -16,6 +16,8 @@ const idArray = [
     'negative','digit-0', 'dot', 'equals'
 ]
 
+const operationsArray = ['mod', 'divide','multiply','subtract','add', 'negative', 'dot', 'equals'];
+
 function createElements(col, row){
 
     container.style.gridTemplateColumns = `repeat(${col},1fr)`;
@@ -26,10 +28,15 @@ function createElements(col, row){
     for(let i = 0; i < gridArea; i++){
 
         let button = document.createElement('button');
-        button.className = 'button';
+
+        button.className = 'buttons';
         button.setAttribute('id', idArray[i]);
         button.textContent = symbolsArray[i];
         button.style.margin = '10px';
+
+        if(button.getAttribute('id').includes('digit')){
+            button.className += ' digits';
+        }
         container.appendChild(button);
     }
 }
