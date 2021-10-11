@@ -1,5 +1,7 @@
 const container = document.getElementById('container');
-const buttons = document.getElementsByClassName('button');
+const digits = document.querySelectorAll('digits');
+const previousOperation = document.getElementById('previousOperation');
+const currentOperation = document.getElementById('currentOperation');
 
 const symbolsArray = [
     'AC', 'C', '%', '÷',
@@ -27,7 +29,7 @@ function createElements(col, row){
 
     for(let i = 0; i < gridArea; i++){
 
-        let button = document.createElement('button');
+        var button = document.createElement('button');
 
         button.classList.add('buttons');
         button.setAttribute('id', idArray[i]);
@@ -35,14 +37,64 @@ function createElements(col, row){
         button.style.margin = '10px';
 
         if(button.getAttribute('id').includes('digit')){
+
             button.classList.add('digits');
+
+            button.addEventListener('click', function(){
+                appendDigit(this.textContent);
+            });
+        }
+
+        if(button.getAttribute('id').includes('clear')){
+            
+            button.addEventListener('click', function(){
+                clear();
+            });
+        }
+
+        if(button.getAttribute('id').includes('allClear')){
+            
+            button.addEventListener('click', function(){
+                clearAll();
+            });
         }
 
         if(operationsArray.includes(button.getAttribute('id'))){
+
             button.classList.add('operations');
+
+            button.addEventListener('click', function(){
+                appendDigit(this.textContent);
+            });
         }
+
         container.appendChild(button);
     }
 }
 
-createElements(4, 5);
+function clear(){
+
+    currentOperation.textContent = currentOperation.textContent.toString().slice(0, -1);
+}
+
+function clearAll(){
+
+    currentOperation.textContent = '0';
+}
+
+function appendDigit(digit){
+
+    if(currentOperation.textContent === '0'){
+        clearScreen();
+    }
+    currentOperation.textContent += digit;
+}
+
+function clearScreen(){
+    currentOperation.textContent = '';
+}
+
+console.log(digits);
+window.onload = function(){
+    createElements(4, 5);
+}

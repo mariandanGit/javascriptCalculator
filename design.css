@@ -1,5 +1,9 @@
+@font-face{
+    font-family:'sevenSegment';
+    src: url('Seven Segment.ttf') format('truetype');
+}
 body{
-    background-color: rgb(18, 80, 116);
+    background-color: rgb(9, 55, 66);
 }
 #mainDiv{
     width: 100%;
@@ -17,69 +21,100 @@ body{
 #containerParent{
     width: 350px;
     height: 500px;
-    background-color: rgb(29, 29, 29);
+    background-color: rgb(39, 39, 39);
     flex-direction: column;
     justify-content: space-around;
     align-items: center;
     border-radius: 1rem;
     box-shadow:0px 15px 0px 0px #646464, 
-      0px 0px 10px 0px rgba(120, 120, 120, 0.4);
+      0px 0px 10px 0px rgba(173, 0, 0, 0);
 }
 #display{
+    text-align: end;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    color:rgb(226, 83, 0);
+    text-shadow: 0px 0px 25px rgb(197, 72, 0);
+    font-size: 40px;
+    font-family: 'sevenSegment';
     width: 280px;
     height: 120px;
     margin-top: 10px;
-    background-color: rgb(65, 65, 65);
-    border-radius: px;
-    -webkit-box-shadow: inset 0px 8px 16px -1px #000000; 
-    box-shadow: inset 0px 8px 16px -1px #000000;
+    background-color: rgb(145, 85, 45);
+    border-radius: 5px;
+    -webkit-box-shadow: inset 1px 3px 15px -2px #000000; 
+    box-shadow: inset 1px 3px 15px -2px #000000;
+}
+.displaySections{
+    max-width: 270px;
 }
 #container{
     display: grid;
     width: 300px;
     height: 300px;
 }
-
 .buttons{
+    font-size: 25px;
     border:none;
     background-color: rgb(192, 192, 192);
     border-radius: 1rem;
-    box-shadow:0px 10px 0px 0px #585858, 
+    box-shadow:0px 5px 0px 0px #585858, 
       0px 0px 10px 0px rgba(120, 120, 120, 0.4);                 
 }
 .buttons:hover{
-    transform: translateY(6px);
-    box-shadow:0px 3px 0px 0px #414141, 
+    transform: translateY(-1px);
+    box-shadow:0px 6px 0px 0px #585858, 
       0px 0px 10px 0px rgba(120, 120, 120, 0.4);
     cursor:pointer;
 }
+.buttons:active{
+    transform: translateY(2px);
+    box-shadow:0px 3px 0px 0px #585858, 
+    0px 0px 10px 0px rgba(120, 120, 120, 0.4);
+}
 .operations{
     background-color: rgb(238, 123, 15);
-    box-shadow:0px 10px 0px 0px #834205, 
+    box-shadow:0px 5px 0px 0px #834205, 
     0px 0px 10px 0px rgba(120, 120, 120, 0.4);
 }
 .operations:hover{
     background-color: rgb(238, 123, 15);
+    box-shadow:0px 6px 0px 0px #834205, 
+    0px 0px 10px 0px rgba(120, 120, 120, 0.4);
+}
+.operations:active{
+    transform: translateY(2px);
     box-shadow:0px 3px 0px 0px #834205, 
     0px 0px 10px 0px rgba(120, 120, 120, 0.4);
 }
 #allClear, #clear{
     background-color: rgb(187, 38, 68);
-    box-shadow:0px 10px 0px 0px #701010, 
+    box-shadow:0px 5px 0px 0px #701010, 
     0px 0px 10px 0px rgba(120, 120, 120, 0.4);
 }
 #allClear:hover, #clear:hover{
     background-color: rgb(187, 38, 68);
+    box-shadow:0px 6px 0px 0px #701010, 
+    0px 0px 10px 0px rgba(120, 120, 120, 0.4);
+}
+#allClear:active, #clear:active{
+    transform: translateY(2px);
     box-shadow:0px 3px 0px 0px #701010, 
     0px 0px 10px 0px rgba(120, 120, 120, 0.4);
 }
 #equals{
     background-color: rgb(66, 160, 86);
-    box-shadow:0px 10px 0px 0px #0b461f, 
+    box-shadow:0px 5px 0px 0px #0b461f, 
     0px 0px 10px 0px rgba(120, 120, 120, 0.4);
 }
 #equals:hover{
     background-color: rgb(66, 160, 86);
+    box-shadow:0px 6px 0px 0px #0b461f, 
+    0px 0px 10px 0px rgba(120, 120, 120, 0.4);
+}
+#equals:active{
+    transform: translateY(2px);
     box-shadow:0px 3px 0px 0px #0b461f, 
     0px 0px 10px 0px rgba(120, 120, 120, 0.4);
 }
