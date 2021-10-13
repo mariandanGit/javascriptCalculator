@@ -3,6 +3,11 @@ const digits = document.querySelectorAll('digits');
 const previousOperation = document.getElementById('previousOperation');
 const currentOperation = document.getElementById('currentOperation');
 
+let shouldClearScreen = false;
+let firstOperand = '';
+let secondOperand = '';
+let currentOperator = null;
+
 const symbolsArray = [
     'AC', 'C', '%', '÷',
     '7', '8', '9' ,'×',
@@ -18,7 +23,7 @@ const idArray = [
     'negative','digit-0', 'dot', 'equals'
 ]
 
-const operationsArray = ['mod', 'divide','multiply','subtract','add', 'negative', 'dot', 'equals'];
+const operationsArray = ['mod', 'divide','multiply','subtract','add'];
 
 function createElements(col, row){
 
@@ -59,12 +64,33 @@ function createElements(col, row){
             });
         }
 
+        if(button.getAttribute('id').includes('equals')){
+            
+            button.addEventListener('click', function(){
+                evaluate();
+            });
+        }
+
+        if(button.getAttribute('id') == 'dot'){
+            
+            button.addEventListener('click', function(){
+                appendPoint();
+            });
+        }
+
+        if(button.getAttribute('id') == 'negative'){
+            
+            button.addEventListener('click', function(){
+                appendNegative();
+            });
+        }
+
         if(operationsArray.includes(button.getAttribute('id'))){
 
             button.classList.add('operations');
-
+            
             button.addEventListener('click', function(){
-                appendDigit(this.textContent);
+                appendOperator(this.textContent);
             });
         }
 
@@ -78,23 +104,166 @@ function clear(){
 }
 
 function clearAll(){
-
+    previousOperation.textContent = '';
     currentOperation.textContent = '0';
+    firstOperand = '';
+    secondOperand = '';
+    currentOperator = null;
+}
+
+function clearScreen(){
+
+    currentOperation.textContent = '';
+    shouldClearScreen = false;
+}
+
+function checkOverflow(el){
+    
+   var currentOverflow = el.style.overflow;
+
+    if(!currentOverflow || currentOverflow === "visible"){
+       el.style.overflow = "hidden";
+    }
+
+   var isOverflowing = el.clientWidth < el.scrollWidth || el.clientHeight < el.scrollHeight;
+
+   el.style.overflow = currentOverflow;
+
+   return isOverflowing;
 }
 
 function appendDigit(digit){
 
-    if(currentOperation.textContent === '0'){
+    if(currentOperation.textContent === '0' || shouldClearScreen){
         clearScreen();
     }
-    currentOperation.textContent += digit;
+
+    let previousTextContent = currentOperation.textContent;
+
+    if (checkOverflow(currentOperation)) {
+        currentOperation.textContent = 'LIMIT EXCEEDED';
+        setTimeout(function(){
+            currentOperation.textContent = previousTextContent;
+        }, 700);
+    }
+    else
+        currentOperation.textContent += digit;
 }
 
-function clearScreen(){
-    currentOperation.textContent = '';
+function appendPoint(){
+    
+    if(currentOperation.textContent === ''){
+        currentOperation.textContent = '0';
+    }
+    if (currentOperation.textContent.includes('.')) {
+        return;
+    }
+    currentOperation.textContent += '.';
 }
 
-console.log(digits);
+function appendOperator(operator){
+
+    if(currentOperator !== null){
+        evaluate();
+    }
+    firstOperand = currentOperation.textContent;
+    currentOperator = operator;
+    previousOperation.textContent = `${firstOperand} ${currentOperator}`;
+    shouldClearScreen = true;
+}
+
+function appendNegative(){
+
+    if(currentOperation.textContent === '0'){
+        return;
+    }
+    if(currentOperation.textContent.includes('-')){
+        currentOperation.textContent = currentOperation.textContent.substring(1);
+    }
+    else{
+        currentOperation.textContent = '-' + currentOperation.textContent;
+    }
+}
+
+function evaluate(){
+
+    if(currentOperator === null || shouldClearScreen){
+        return;
+    }
+    if(currentOperator === '÷' && currentOperation.textContent === '0'){
+        
+        currentOperation.textContent = 'LMAO';
+        return;
+    }
+    secondOperand = currentOperation.textContent;
+    
+    let result = roundResult(operate(firstOperand, currentOperator, secondOperand));
+
+    if(result > 10e9){
+        currentOperation.textContent = result.toExponential(2);
+    }
+    else{
+        currentOperation.textContent = result;
+    }
+
+    previousOperation.textContent = `${firstOperand} ${currentOperator} ${secondOperand} =`
+    currentOperator = null;
+}
+
+function roundResult(number) {
+
+    return Math.round(number * 1000) / 1000;
+}
+
+function add(a, b) {
+    return a + b;
+}
+  
+function subtract(a, b) {
+    return a - b;
+}
+  
+function multiply(a, b) {
+    return a * b;
+}
+  
+function divide(a, b) {
+    return a / b;
+}
+function mod(a, b){
+    return a % b;
+}
+
+function operate(a, operator, b) {
+    
+    a = Number(a)
+    b = Number(b)
+    
+    switch (operator) {
+
+      case '+':
+        return add(a, b);
+
+      case '-':
+        return subtract(a, b);
+
+      case '×':
+        return multiply(a, b);
+
+      case '%':
+          return mod(a, b);  
+
+      case '÷':
+        if (b === 0)
+            return null
+        else 
+            return divide(a, b);
+
+      default:
+        return null
+    }
+}
+
 window.onload = function(){
     createElements(4, 5);
 }
